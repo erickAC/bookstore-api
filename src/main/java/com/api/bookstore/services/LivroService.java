@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.bookstore.domain.Categoria;
 import com.api.bookstore.domain.Livro;
 import com.api.bookstore.repositories.LivroRepository;
 import com.api.bookstore.services.exceptions.ObjectNotFoundException;
@@ -40,6 +41,13 @@ public class LivroService {
 		newObj.setTitulo(obj.getTitulo());
 		newObj.setNome_autor(obj.getNome_autor());
 		newObj.setTexto(obj.getTexto());
+	}
+
+	public Livro create(Integer id_cat, Livro obj) {
+		obj.setId(null);
+		Categoria cat = categoriaService.findById(id_cat);
+		obj.setCategoria(cat);
+		return repository.save(obj);
 	}
 
 }
