@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.api.bookstore.domain.Categoria;
@@ -48,6 +49,11 @@ public class LivroService {
 		Categoria cat = categoriaService.findById(id_cat);
 		obj.setCategoria(cat);
 		return repository.save(obj);
+	}
+
+	public void delete(Integer id) {
+		Livro obj = findById(id);
+		repository.delete(obj);
 	}
 
 }
